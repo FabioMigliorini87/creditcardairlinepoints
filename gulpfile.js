@@ -5,10 +5,12 @@ var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
+var notify = require('gulp-notify');
 var runSequence = require('run-sequence');
 var argv = require('yargs').argv;
 var minifycss = require('gulp-minify-css');
 var ngAnnotate = require('gulp-ng-annotate');
+var karma = require('gulp-karma');
 var uglify = require('gulp-uglify');
 var gulpif = require('gulp-if');
 var plumber = require('gulp-plumber');
@@ -17,7 +19,12 @@ var del = require('del');
 var production = !!argv.production;
 
 var testFiles = [
-  'src/test/*'
+  'bower_components/jquery/dist/jquery.min.js',
+  'bower_components/angular/angular.min.js',
+  'bower_components/angular-route/angular-route.min.js',
+  'bower_components/angular-mocks/angular-mocks.js',
+  'src/js/**/*.js',
+  'test/unit/**/*.js',
 ];
 
 var viewFiles = 'src/**/*.html';
@@ -153,7 +160,7 @@ gulp.task('test', function() {
     .on('error', function(err) {
       // Make sure failed tests cause gulp to exit non-zero
       console.log('ERROR: ', err);
-      throw err;
+      // throw err;
     });
 });
 
