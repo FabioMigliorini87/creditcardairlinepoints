@@ -6,31 +6,31 @@ angular.module("creditcardApp").config(function($routeProvider, $locationProvide
 
         // route for the home page
         .when('/', {
-            templateUrl : 'partials/home.html',
+            templateUrl : 'views/home.html',
             controller  : 'mainController'
         })
 
         // route for the about page
         .when('/about', {
-            templateUrl : 'partials/page.html',
+            templateUrl : 'views/page.html',
             controller  : 'aboutController'
         })
 
         // route for the contact page
         .when('/contact', {
-            templateUrl : 'partials/page.html',
+            templateUrl : 'views/page.html',
             controller  : 'contactController'
         })
 
         // route for the contact page
         .when('/login', {
-            templateUrl : 'partials/login.html',
+            templateUrl : 'views/login.html',
             controller  : 'loginController'
         })
 
         // route for the contact page
         .when('/admin', {
-            templateUrl : 'partials/admin.html',
+            templateUrl : 'views/admin.html',
             controller  : 'adminController'
         });
 
