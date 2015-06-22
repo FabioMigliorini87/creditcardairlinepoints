@@ -62,5 +62,10 @@
     "phantomjs": "^1.9.17",
     "run-sequence": "^1.1.1",
     "yargs": "^3.12.0"
+  },
+  "scripts": {
+    "postinstall": "bower install && gulp build",
+    "pretest": "npm install",
+    "test": "gulp test"
   }
 }
