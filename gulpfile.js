@@ -165,14 +165,7 @@ gulp.task('test', function() {
 });
 
 gulp.task('build:dev', function(cb) {
-  return runSequence('build:clean', [
-    'build:views', 
-    'build:styles', 
-    'build:js',
-    'build:bower_js', 
-    'build:bower_css', 
-    'build:images'
-  ], 'dev:server-start', function() {
+  return runSequence('build:clean', 'build', 'dev:server-start', function() {
 
     gulp.watch(viewFiles, ['build:views']);
     gulp.watch(jsFiles, ['build:js']);
@@ -182,6 +175,21 @@ gulp.task('build:dev', function(cb) {
     cb();
 
   });
+});
+
+/* Dist Build */
+gulp.task('build', function(cb) {
+  return runSequence(
+    'build:clean',
+    ['build:views', 
+      'build:styles', 
+      'build:js',
+      'build:bower_js', 
+      'build:bower_css', 
+      'build:images'], 
+    function() {
+      cb();
+    });
 });
 
 gulp.task('dev:server-start', function() {
