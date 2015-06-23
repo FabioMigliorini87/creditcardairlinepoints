@@ -1,0 +1,92 @@
+//home.html
+.container-fluid
+  .row
+    .col-sm-3.sidebar
+      h3 Value       
+      p
+        em Enter the value of each system
+      table.control
+        tbody
+          tr
+            td Avios
+            td
+              input.form-control(ng-change='updateAvios();', type='number', step='any', min='0', ng-model='control.avios', name='avios')
+            td p/point
+          tr
+            td Amex MR
+            td
+              input.form-control(ng-change='updateAmex();', type='number', step='any', min='0', ng-model='control.amex', name='amexMR')
+            td p/point
+          tr
+            td SPG
+            td
+              input.form-control(ng-change='updateSpg();', type='number', step='any', min='0', ng-model='control.spg', name='spg')
+            td p/point
+          tr
+            td Virgin Flying Club
+            td
+              input.form-control(ng-change='updateVirgin();', type='number', step='any', min='0', ng-model='control.virgin', name='virgin')
+            td p/point
+          tr
+            td Marriott Rewards
+            td
+              input.form-control(ng-change='updateMarriott();', type='number', step='any', min='0', ng-model='control.marriott', name='marriott')
+            td p/point
+          tr
+            td IHG Rewards
+            td
+              input.form-control(ng-change='updateIhg();', type='number', step='any', min='0', ng-model='control.ihg', name='ihg')
+            td p/point
+          tr
+            td Hilton
+            td
+              input.form-control(ng-change='updateHilton();', type='number', step='any', min='0', ng-model='control.hilton', name='hilton')
+            td &pound;/night
+      h3 Filters
+      p
+        em Select the links to show only cards from a particular category 
+      ul.nav.nav-sidebar
+        li(ng-repeat='filter in filters', ng-click='selectFilter($index);updateStatus(filter.filterId)', ng-class='{active: $index===selectedIndex}')
+          a(href='#') {{ filter.anchor }}
+    .col-sm-9.col-sm-offset-3.main
+      h2.sub-header Recommended Cards
+      .row.placeholders
+        .col-xs-6.col-sm-3.placeholder(ng-repeat="card in cards | orderBy:'-bonusValue'", ng-if='$index < 4')
+          a(href='{{ card.cardURL }}', title='{{ card.cardName }}')
+            img.img-responsive(height='177', width='284', src='images/{{ card.imageName }}', alt='{{ card.cardName }}')
+          h4 {{ card.cardName }}
+          span.text-muted {{ card.cardBonus }} {{ card.bonusCurrencyVisual }}
+      h2.sub-header Compare Cards
+      .table-responsive
+        table.table.table-striped
+          thead
+            tr
+              th(colspan='2')
+                a(href='', ng-click="predicate = '-cardName'; reverse=!reverse;") Credit Card
+              th
+                a(href='', ng-click="predicate = 'cardFee'; reverse=!reverse;") Fee
+              th
+                a(href='', ng-click="predicate = 'bonusValue'; reverse=!reverse;") Bonus
+              th
+                a(href='', ng-click="predicate = 'minSpend'; reverse=!reverse;") Minimum Spend
+              th
+                a(href='', ng-click="predicate = '-spendTimeLimit'; reverse=false;") Time Limit        
+              th Application Link
+          tbody
+            tr(ng-repeat='card in cards | orderBy:predicate:reverse', ng-if='cardFilter(card.cardStatus)')
+              td
+                img.img-responsive(height='100', width='160', src='images/{{ card.imageName }}', alt='{{ card.cardName }}')        
+              td {{ card.cardName }}
+              td {{ card.cardFeeSymbol }}{{ card.cardFeeVisual }}
+              td {{ card.cardBonusVisual }} {{ card.bonusCurrencyVisual }}
+              td {{ card.minSpendSymbol }}{{ card.minSpendVisual }}
+              td {{ card.spendTimeLimitVisual }} {{ card.spendTimeLimitDays }}
+              td
+                a(href='{{ card.cardURL }}', title='{{ card.cardName }}') Apply now
+        footer
+          p
+            small * Includes Hilton, Conrad and Waldorf-Astoria properties
+          p
+            small
+              | Copyright &copy; 
+              a(href='http://www.johncpeden.com', title='John Peden Ltd') John Peden Ltd

@@ -1,0 +1,7 @@
+// page.html
+.jumbotron
+  .container
+    h1 {{ title }}
+    div(ng-repeat="paragraph in paragraphs")
+      p {{ paragraph }}
+    a.btn.btn-primary.btn-lg(href="{{ url }}" role="button") {{ linkAnchor }} &raquo;

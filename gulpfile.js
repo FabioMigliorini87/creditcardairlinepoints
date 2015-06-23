@@ -3,6 +3,7 @@ var sass = require('gulp-sass');
 var webserver = require('gulp-webserver');
 var rename = require('gulp-rename');
 var sourcemaps = require('gulp-sourcemaps');
+var jade = require('gulp-jade');
 var concat = require('gulp-concat');
 var autoprefixer = require('gulp-autoprefixer');
 var notify = require('gulp-notify');
@@ -27,7 +28,7 @@ var testFiles = [
   'test/unit/**/*.js',
 ];
 
-var viewFiles = 'src/**/*.html';
+var viewFiles = 'src/**/*.jade';
 
 var scssFiles = 'src/css/**/*.scss';
 
@@ -65,18 +66,22 @@ var notifyError = function (err) {
   this.emit('end');
 };
 
+/* Clean the existing public dir */
 gulp.task("build:clean", function(cb) {
   return del(["public/**/*"], cb);
 });
 
+/* Build views to public dir */
 gulp.task('build:views', function() {
   return gulp.src(viewFiles, { base: 'src' })
     .pipe(plumber({
       errorHandler: notifyError
     }))
+    .pipe( jade({ pretty: true }))
     .pipe(gulp.dest('public'));
 });
 
+/* Build styles to public dir */
 gulp.task('build:styles', function() {
   return gulp.src(scssFiles, { base: 'src' })
     .pipe(plumber({
@@ -99,6 +104,7 @@ gulp.task('build:styles', function() {
     .pipe(gulp.dest('public'));
 });
 
+/* Build JS to public dir */
 gulp.task('build:js', function() {
   return gulp.src(jsFiles, { base: 'src' })
     .pipe(plumber({
@@ -121,6 +127,7 @@ gulp.task('build:bower_js', function() {
     .pipe(gulp.dest('public/js/vendor'));
 });
 
+
 gulp.task('build:bower_css', function() {
   return gulp.src(bowerCSSDeps)
     .pipe(plumber())
@@ -130,6 +137,7 @@ gulp.task('build:bower_css', function() {
     .pipe(gulp.dest('public/css/vendor'));
 });
 
+/* Build images to public dir */
 gulp.task('build:images', function() {
   return gulp.src(imageFiles, { base: 'src' })
     .pipe(plumber())

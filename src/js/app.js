@@ -20,18 +20,6 @@ angular.module("creditcardApp").config(function($routeProvider, $locationProvide
         .when('/contact', {
             templateUrl : 'views/page.html',
             controller  : 'contactController'
-        })
-
-        // route for the contact page
-        .when('/login', {
-            templateUrl : 'views/login.html',
-            controller  : 'loginController'
-        })
-
-        // route for the contact page
-        .when('/admin', {
-            templateUrl : 'views/admin.html',
-            controller  : 'adminController'
         });
 
         // use the HTML5 History API
