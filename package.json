@@ -16,7 +16,7 @@
   "homepage": "http://www.johncpeden.com/",
   "repository": {
     "type": "git",
-    "url": "https://bitbucket.org/jcpeden/angular"
+    "url": "https://github.com/jcpeden/creditcardairlinepoints.git"
   },
   "engines": {
     "node": ">= 0.6.0",
